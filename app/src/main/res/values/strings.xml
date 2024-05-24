@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">PuffAndPoofAOL</string>
+    <string name="AppTitle">Puff and Poof</string>
+    <string name="username">username</string>
+    <string name="password">password</string>
+    <string name="dummy_name">John Doe</string>
+    <string name="dummy_password">u%$2!3</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="product_detail">Product Detail</string>
+    <string name="_0">0</string>
+</resources>

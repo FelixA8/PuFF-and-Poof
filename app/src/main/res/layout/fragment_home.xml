@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#4DBFFF"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragments.HomeFragment">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#4DBFFF">
+        <LinearLayout
+            android:id="@+id/homeHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:elevation="20dp"
+            android:background="@drawable/gradient_background_main"
+            app:layout_constraintTop_toTopOf="parent"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/homeHeaderTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="4dp"
+                android:fontFamily="@font/roboto_bold"
+                android:textColor="@color/blue_300"
+                android:textSize="16sp"
+                android:background="@drawable/topleft_bottomright_rectangle"
+                android:text="MyCash"/>
+
+
+            <RelativeLayout android:id="@+id/homeHeaderCash"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:showDividers="middle"
+                android:paddingHorizontal="8dp"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal"
+                >
+                <TextView
+                    android:layout_alignParentStart="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_bold"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:text="Rp 999.999">
+                </TextView>
+                <LinearLayout
+                    android:layout_alignParentEnd="true"
+                    android:layout_width="wrap_content"
+                    android:paddingHorizontal="4dp"
+                    android:background="@drawable/white_background_rounded"
+                    android:layout_height="wrap_content" android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/point_image"
+                        android:layout_gravity="center_vertical"
+                        />
+                    <TextView
+                        android:id="@+id/homeHeaderPoint"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_bold"
+                        android:textColor="@color/blue_300"
+                        android:textSize="16sp"
+                        android:paddingLeft="12dp"
+                        android:text="4.124 Points"/>
+                </LinearLayout>
+            </RelativeLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_bold"
+                android:textColor="@color/white"
+                android:padding="8dp"
+                android:text="Platinum"
+                android:textSize="16sp"
+                android:layout_marginTop="32dp"
+                android:textAlignment="textEnd" />
+        </LinearLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/homeRV"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="2"
+            app:layout_constraintTop_toBottomOf="@id/homeHeader"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:overScrollMode="never"
+            android:layout_marginTop="32dp"
+            app:flow_horizontalGap="5dp"
+            android:paddingHorizontal="12dp"
+            android:paddingTop="54dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:background="@drawable/white_background_rounded"
+            android:layout_width="wrap_content"
+            android:scrollbars="none"
+            android:layout_gravity="center_horizontal"
+            android:layout_height="wrap_content"
+            tools:listitem="@layout/doll_card"
+            />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</ScrollView>
