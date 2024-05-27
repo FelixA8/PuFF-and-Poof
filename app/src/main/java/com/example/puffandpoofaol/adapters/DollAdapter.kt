@@ -20,6 +20,8 @@ import java.net.URI
 import java.net.URL
 
 class DollAdapter(private val context:Context, val listDolls: ArrayList<Doll>):RecyclerView.Adapter<DollAdapter.MainViewHolder>() {
+
+    //An inner class that extends RecyclerView.ViewHolder and holds references to the UI components in a doll card.
     inner class MainViewHolder(private val itemBinding: DollCardBinding):RecyclerView.ViewHolder(itemBinding.root){
         private val dollImage = itemBinding.ivDollCardImage
         val dollTitle = itemBinding.tvDollCardTitle
@@ -27,6 +29,7 @@ class DollAdapter(private val context:Context, val listDolls: ArrayList<Doll>):R
         val dollSize = itemBinding.tvDollCardSize
         val dollRating = itemBinding.tvDollCardRating
 
+        //Load image from URL using Picasso Library.
         fun bind(imageUrl: String) {
             Picasso.get().load(imageUrl).into(dollImage)
         }
@@ -40,6 +43,8 @@ class DollAdapter(private val context:Context, val listDolls: ArrayList<Doll>):R
         return listDolls.size
     }
 
+    //Description: Binds the data from the Doll object at the specified position to the UI components in the MainViewHolder.
+    // Sets up an OnClickListener to handle item clicks, which starts DollDetailActivity with the doll's details.
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
         val doll = listDolls[position]
         holder.bind(doll.dollImageURL)
@@ -47,6 +52,8 @@ class DollAdapter(private val context:Context, val listDolls: ArrayList<Doll>):R
         holder.dollRating.text = doll.dollRating.toString()
         holder.dollTitle.text = doll.dollName
         holder.dollSize.text = doll.dollSize
+
+        //When pressed, go to the doll details activity
         holder.itemView.setOnClickListener {
             println(doll)
             val intent = Intent(context, DollDetailActivity::class.java).apply {

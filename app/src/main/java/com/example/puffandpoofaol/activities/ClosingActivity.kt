@@ -41,12 +41,14 @@ class ClosingActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     fun getLastLocation(){
+        //Get the permission of the device and set the lat and lng of the location.
         if(ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
                 ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION)!= PackageManager.PERMISSION_GRANTED) {
         ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), 1)
 
             return
         }
+        //If permission granted, then set the location.
         var task: Task<Location> = fusedLocationProviderClient.getLastLocation()
         task.addOnSuccessListener { location: Location? ->
             if(location != null) {
@@ -75,6 +77,7 @@ class ClosingActivity : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
+    //Render the google maps
     override fun onMapReady(p0: GoogleMap) {
         myMap = p0
         var myLocation = LatLng(currLocation.latitude, currLocation.longitude)

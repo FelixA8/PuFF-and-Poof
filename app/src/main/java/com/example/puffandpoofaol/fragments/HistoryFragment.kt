@@ -23,10 +23,12 @@ class HistoryFragment : Fragment() {
     ): View {
         val binding = FragmentHistoryBinding.inflate(layoutInflater)
         db = DatabaseHelper(requireContext())
+        //Fetch the transaction list data.
         var transactionList = db.selectTransaction(Global.currentUser.userId)
         if(transactionList.isEmpty()) {
             println("empty")
         } else {
+            //Run the adapter
             val adapter = TransactionAdapter(requireContext(), listTransaction = transactionList)
             println("transactionList = $transactionList")
             binding.transactionRV.adapter = adapter

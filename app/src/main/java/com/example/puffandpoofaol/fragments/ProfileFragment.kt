@@ -25,6 +25,7 @@ class ProfileFragment(
         savedInstanceState: Bundle?
     ): View {
         val binding = FragmentProfileBinding.inflate(layoutInflater)
+        //Get the data with the sharedprefs
         sharedpreferences = this.requireActivity().getSharedPreferences("shared_prefs", Context.MODE_PRIVATE);
         binding.tvProfileUsername.text = currentUser.userName
         binding.tvProfileEmail.text = currentUser.userEmail
@@ -32,8 +33,8 @@ class ProfileFragment(
         binding.tvProfilePhoneNumber.text = currentUser.userTelephoneNumber
         binding.btnLogout.setOnClickListener {
             val intent = Intent(context, ClosingActivity::class.java);
-            val editor = sharedpreferences.edit()
-            editor.clear()
+            val editor = sharedpreferences.edit() //edit the sharedprefs
+            editor.clear() //clear the data of the sharedprefs
             editor.commit()
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)

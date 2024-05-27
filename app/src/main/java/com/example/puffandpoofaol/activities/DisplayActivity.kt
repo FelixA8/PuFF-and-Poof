@@ -52,6 +52,8 @@ class DisplayActivity : AppCompatActivity() {
 
         val initialFragment = intent.extras?.getString("fragment")
         val bottomNav = binding.bottomNav
+
+        //Get logged user data
         sharedpreferences = getSharedPreferences(LoginActivity.SHARED_PREFS, Context.MODE_PRIVATE)
         username = sharedpreferences.getString(LoginActivity.USERNAME_KEY, null)
         password = sharedpreferences.getString(LoginActivity.PASSWORD_KEY, null)
@@ -63,6 +65,7 @@ class DisplayActivity : AppCompatActivity() {
             println("error")
         }
 
+        //set the initial fragment.
         if(initialFragment == "history") {
             renderFragment(HistoryFragment())
             val view:View = bottomNav.findViewById(R.id.history)
@@ -70,6 +73,8 @@ class DisplayActivity : AppCompatActivity() {
         } else {
             renderFragment(HomeFragment())
         }
+
+        //Set the bottom navbar and its functionality.
         bottomNav.setOnItemSelectedListener {
             when(it.itemId) {
                 R.id.home -> {
@@ -89,8 +94,9 @@ class DisplayActivity : AppCompatActivity() {
                 }
             }
         }
-
     }
+
+    //Render the fragment
     private  fun renderFragment(fragment: Fragment){
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.container, fragment)

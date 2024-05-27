@@ -17,6 +17,8 @@ class DollDetailActivity : AppCompatActivity() {
     private lateinit var db: DatabaseHelper
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        //GET The data of the doll from binding/ previous activity.
         val binding = ActivityDollDetailBinding.inflate(layoutInflater)
         val id = intent.extras?.getString("dollId")
         val title = intent.extras?.getString("dollName")
@@ -26,7 +28,6 @@ class DollDetailActivity : AppCompatActivity() {
         val size = intent.extras?.getString("dollSize")
         val description = intent.extras?.getString("dollDetail")
         db = DatabaseHelper(this)
-        println("id = $id")
         binding.tvDollDetailName.text = title
         Picasso.get().load(imageUrl).into(binding.ivDollDetailImage)
         binding.tvDollDetailPrice.text = price
@@ -36,6 +37,8 @@ class DollDetailActivity : AppCompatActivity() {
         binding.ivDetailBack.setOnClickListener {
             finish()
         }
+
+        //Button Go to history page.
         binding.ivDetailGoToHistory.setOnClickListener {
             val intent = Intent(this, DisplayActivity::class.java).apply {
                 putExtra("fragment", "history")
@@ -43,8 +46,10 @@ class DollDetailActivity : AppCompatActivity() {
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)
         }
-        binding.btnBuyProduct.setOnClickListener {
 
+        //btn Buy Product.
+        binding.btnBuyProduct.setOnClickListener {
+            //Check if amount is 0 or less, then set error.
             if (binding.etDollDetailAmount.text.isEmpty() || binding.etDollDetailAmount.text.toString().toInt() <= 0) {
                 val builder = AlertDialog.Builder(this)
                 builder.setTitle("Error")
@@ -54,9 +59,11 @@ class DollDetailActivity : AppCompatActivity() {
                 val dialog = builder.create()
                 dialog.show()
             } else {
+                //Get the current time stamp in yyyy-mm-dd hh:mm:ss
                 val current = LocalDateTime.now()
                 val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
                 val formatted = current.format(formatter)
+                //insert new transaction
                 db.insertTransaction(Global.currentUser.userId, id!!.toInt(), binding.etDollDetailAmount.text.toString().toInt(), formatted, title.toString())
                 Toast.makeText(this, "Purchase Success!", Toast.LENGTH_SHORT).show()
                 finish()

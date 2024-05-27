@@ -32,19 +32,25 @@ class HomeFragment() : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val binding = FragmentHomeBinding.inflate(layoutInflater)
+        //make the recyclerview cannot be scrolled, since scrollview already implement the scroll view.
         binding.homeRV.isNestedScrollingEnabled = false
         db = DatabaseHelper(requireContext())
+        //Access database and fetch the doll from database
         var dollList = db.selectAllDoll()
         println(dollList)
+        //If database is empty, then get the doll data from json and insert it
         if(dollList.isEmpty()) {
             try {
                 val queue = Volley.newRequestQueue(context)
+                //Get the JSON data
                 val request = JsonObjectRequest(
                     Request.Method.GET, "https://api.npoint.io/9d7f4f02be5d5631a664", null, {
                             response -> try {
+                                //Get the formatted data from json.
                         dollList = parseJSON(response)
                         val adapter = DollAdapter(requireContext(), listDolls = dollList)
                         binding.homeRV.adapter = adapter
+                        //Set the recyclerview to gridview
                         binding.homeRV.layoutManager = GridLayoutManager(requireContext(), 2)
                     } catch (e: JSONException) {
                         e.printStackTrace()
@@ -59,6 +65,7 @@ class HomeFragment() : Fragment() {
                 println(e)
             }
         } else{
+            //Set the doll Adapter based on the data in the database.
             val adapter = DollAdapter(requireContext(), listDolls = dollList)
             binding.homeRV.adapter = adapter
             binding.homeRV.layoutManager = GridLayoutManager(requireContext(), 2)

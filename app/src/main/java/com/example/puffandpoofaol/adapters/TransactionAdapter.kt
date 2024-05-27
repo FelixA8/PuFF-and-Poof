@@ -51,17 +51,20 @@ class TransactionAdapter(private val context:Context, private var listTransactio
         return listTransaction.size
     }
 
+    //Description: Binds the data from the Doll object at the specified position to the UI components in the MainViewHolder.
+    // Sets up an OnClickListener to handle item clicks, which responsible for updating/ deleting items.
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
         db = DatabaseHelper(context)
         val transaction = listTransaction[position]
-        println(listTransaction)
+
         holder.transactionDate.text = transaction.transactionDate
         holder.transactionId.text = transaction.transactionID.toString()
         holder.dollName.text = transaction.dollName
         holder.transactionAmount.text = "x${transaction.transactionAmount}"
+        //Delete Item Button
         holder.deleteBtn.setOnClickListener {
             db.deleteTransaction(transactionID = transaction.transactionID)
-            listTransaction.removeAt(position)
+            listTransaction.removeAt(position) //refresh the current data by removing the data from previous arraylist.
             updateData(listTransaction)
         }
         holder.updateBtn.setOnClickListener {
@@ -86,7 +89,7 @@ class TransactionAdapter(private val context:Context, private var listTransactio
     }
 
     fun updateData(newDataList: ArrayList<Transaction>) {
-        listTransaction = newDataList
+        listTransaction = newDataList //refresh the new transaction.
         notifyDataSetChanged()
     }
 }

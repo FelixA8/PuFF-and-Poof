@@ -29,10 +29,9 @@ class RegisterActivity : AppCompatActivity() {
         setContentView(binding.root)
         super.onCreate(savedInstanceState)
 
-
-
         db = DatabaseHelper(this)
 
+        //Register button. When clicked and the validation is true, save user to database proceed to the login activity.
         binding.btnRegister.setOnClickListener {
             binding.rbMale.isChecked = true
             etEmail = binding.etRegisterEmail
@@ -49,14 +48,13 @@ class RegisterActivity : AppCompatActivity() {
                 startActivity(intent)
             }
         }
-
-
-
+        //Back to login page.
         binding.tvToLoginPage.setOnClickListener {
             finish();
         }
     }
 
+    //Validation function
     private fun validate():Boolean{
         if(etEmail.text.isEmpty() || etPassword.text.isEmpty() || etName.text.isEmpty() || etPhoneNumber.text.isEmpty() ||
             rgGender.checkedRadioButtonId ==-1 ) {
@@ -76,7 +74,7 @@ class RegisterActivity : AppCompatActivity() {
             val selectedId: Int = rgGender.checkedRadioButtonId
             val selectedRadioButton : RadioButton = findViewById(selectedId)
             val user = User(-1, etName.text.toString(), etEmail.text.toString(), etPassword.text.toString(), etPhoneNumber.text.toString(), selectedRadioButton.text.toString())
-            db.insertUser(user);
+            db.insertUser(user); //Create new user.
             Toast.makeText(this, "Success! Please Login using the registered email!", Toast.LENGTH_SHORT).show()
             return true
         }

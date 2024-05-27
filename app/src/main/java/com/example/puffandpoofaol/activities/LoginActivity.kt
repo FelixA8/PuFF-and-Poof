@@ -11,6 +11,7 @@ import com.example.puffandpoofaol.data.DatabaseHelper
 import com.example.puffandpoofaol.databinding.ActivityLoginBinding
 
 class LoginActivity : AppCompatActivity() {
+
     companion object {
         const val SHARED_PREFS = "shared_prefs"
         const val USERNAME_KEY = "username_key"
@@ -26,11 +27,13 @@ class LoginActivity : AppCompatActivity() {
         val binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
         db = DatabaseHelper(this)
+        //get shared Preferences Data to keep data whether the user is logged or not.
         sharedpreferences = getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE)
         username = sharedpreferences.getString(USERNAME_KEY, null)
         password = sharedpreferences.getString(PASSWORD_KEY, null)
-
+        //If the username or password is empty in the shared preferences, do not proceed to the display activity.
         if(username != null && password != null) {
             println(username)
             println(password)
@@ -38,7 +41,7 @@ class LoginActivity : AppCompatActivity() {
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)
         }
-
+        //Login button, when pressed it will validate and if true, proceed to display activity.
         binding.btnToOTPPage.setOnClickListener {
             val loggedUser = db.validateUserLogin(binding.etLoginUsername.text.toString(), binding.etLoginPassword.text.toString())
             if(loggedUser !== null) {
@@ -56,7 +59,7 @@ class LoginActivity : AppCompatActivity() {
                 println("false")
             }
         }
-
+        //Go to register page.
         binding.tvToRegisterPage.setOnClickListener {
             val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent);

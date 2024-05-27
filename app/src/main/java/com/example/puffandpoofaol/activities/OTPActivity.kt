@@ -35,7 +35,7 @@ class OTPActivity : AppCompatActivity() {
             checkSendSMSPermission(phoneNumber, message)
             Toast.makeText(this, "OTP has ben resent! Please check your messages again!", Toast.LENGTH_LONG).show()
         }
-
+        //SMS Button.
         binding.btnToDisplayPage.setOnClickListener {
             if(binding.etOTPCode.text.length < 4) {
                 Toast.makeText(this, "Please input a valid OTP Code", Toast.LENGTH_SHORT).show()
@@ -50,14 +50,17 @@ class OTPActivity : AppCompatActivity() {
             }
         }
     }
+
     fun checkSendSMSPermission(phoneNumber: String, message:String){
-        print(phoneNumber)
+        //Check if permission is enabled.
         if(ActivityCompat.checkSelfPermission(this, android.Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED){
+            //Request permission.
             ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.SEND_SMS), 100);
         } else {
             sendSMS(phoneNumber, message)
         }
     }
+    //Send SMS to phone
     fun sendSMS(phoneNumber: String, message: String) {
         smsManager.sendTextMessage(phoneNumber, null, message, null, null)
     }
