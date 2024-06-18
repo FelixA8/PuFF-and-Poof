@@ -80,7 +80,9 @@ class ClosingActivity : AppCompatActivity(), OnMapReadyCallback {
     //Render the google maps
     override fun onMapReady(p0: GoogleMap) {
         myMap = p0
-        var myLocation = LatLng(currLocation.latitude, currLocation.longitude)
+        var myLocation = LatLng(-6.20201, 106.78113)
+        println(currLocation.latitude)
+        println(currLocation.longitude)
         var cameraPosition = CameraPosition.builder().target(myLocation).zoom(20.0F).build()
         myMap.addMarker(MarkerOptions().position(myLocation).title("PuFF and Poof"))
         myMap.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
