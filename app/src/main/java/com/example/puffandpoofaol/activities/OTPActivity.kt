@@ -21,7 +21,7 @@ class OTPActivity : AppCompatActivity() {
         val binding = ActivityOtpBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val randomNumber = Random.nextInt(1000, 10000)
-        val message = "Your OTP Number is $randomNumber"
+        val message = "DO NOT SHARE! Your OTP Number is ${randomNumber}"
         val intent = intent
         val bundle = intent.extras
         if (bundle != null) {

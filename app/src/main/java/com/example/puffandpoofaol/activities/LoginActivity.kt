@@ -54,8 +54,10 @@ class LoginActivity : AppCompatActivity() {
                     editor.putString(PASSWORD_KEY, loggedUser.userPassword)
                     editor.apply()
                 }
+                Toast.makeText(this, "Login Success!", Toast.LENGTH_LONG).show()
                 startActivity(intent)
             } else {
+                Toast.makeText(this, "Login Failed, Please check your Username and Password.", Toast.LENGTH_LONG).show()
                 println("false")
             }
         }
